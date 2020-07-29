@@ -15,8 +15,9 @@ guest# service systemd-journald restart
 guest# sleep 3
 guest# journalctl --header | grep -q 'File Path' || { echo "journalctl doesn't appear to work."; exit 1 }
 guest# mkdir -p /vagrant/var/log/journal/
-guest# rm -rf /vagrant/var/log/journal/
+guest# rm -rf /vagrant/var/log/journal/*
 guest# cp -R /var/log/journal/* /vagrant/var/log/journal/
+guest# mv /vagrant/var/log/journal/$(ls /vagrant/var/log/journal) /vagrant/var/log/journal/$(cat /vagrant/etc/machine-id)
 guest# exit
 guest$ exit
 
